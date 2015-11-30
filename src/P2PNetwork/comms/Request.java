@@ -1,4 +1,4 @@
-package P2PNetwork.requests;
+package P2PNetwork.comms;
 
 import P2PNetwork.Peer;
 

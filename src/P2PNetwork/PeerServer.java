@@ -1,32 +1,32 @@
 package P2PNetwork;
 
-import P2PNetwork.events.TrackerConnectEvent;
-import P2PNetwork.comms.*;
+import P2PNetwork.comms.Request;
+import P2PNetwork.events.PeerConnectEvent;
 import com.google.common.eventbus.EventBus;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
  * Created by malsokait on 2015-11-29.
  */
-public class TrackerServer extends Thread {
+public class PeerServer extends Thread {
     private int port;
     private ServerSocket serverSocket;
-    private boolean run = false;
-    private EventBus eventBus;
+    private boolean run;
+    private EventBus peerEventBus;
 
-
-    public TrackerServer(int port){
+    public PeerServer(int port){
         this.port = port;
-        eventBus = Tracker.getEventBus();
-        eventBus.register(this);
+        peerEventBus = PeerManager.getPeerEventBus();
+        peerEventBus.register(this);
     }
 
-    public void startServerSocket(){
-        try{
+    public void startPeerServer(){
+        try {
             serverSocket = new ServerSocket(port);
             this.start();
         } catch (IOException e) {
@@ -34,7 +34,7 @@ public class TrackerServer extends Thread {
         }
     }
 
-    public void stopServerSocket(){
+    public void stopPeerServer(){
         run = false;
         this.interrupt();
     }
@@ -46,12 +46,10 @@ public class TrackerServer extends Thread {
             try {
                 Socket socket = serverSocket.accept();
                 Request request = (Request) new ObjectInputStream(socket.getInputStream()).readObject();
-                eventBus.post(new TrackerConnectEvent(request));
-
+                peerEventBus.post(new PeerConnectEvent(request));
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
-
 }

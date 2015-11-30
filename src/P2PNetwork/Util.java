@@ -1,6 +1,6 @@
 package P2PNetwork;
 
-import P2PNetwork.requests.Request;
+import P2PNetwork.comms.Request;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
