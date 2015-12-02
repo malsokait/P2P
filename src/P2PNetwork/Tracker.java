@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Tracker {
     public static final int PORT = 11000;
-    public static final InetAddress HOST = Util.getHost();
+    public static final InetAddress HOST = Util.getTrackerAddress();
 
     private InetAddress host;
     private int port;
@@ -62,20 +62,11 @@ public class Tracker {
         Peer peer = request.getPeer();
         if(filesMap.containsKey(request.getFileName())){
             ImmutableSet<Peer> peers = ImmutableSet.copyOf(filesMap.get(request.getFileName()));
-            try(Socket socket = new Socket(peer.getAddress(), peer.getPort())){
-                Request reply = new FileReply(peer, request.getFileName(), peers);
-                if(Util.sendRequest(socket, reply)){
-                    StringBuilder msg = new StringBuilder();
-                    msg.append("Sent download file reply to peer: ");
-                    msg.append(peer.toString());
-                    msg.append(", requested file: ");
-                    msg.append(request.getFileName());
-                    System.out.println(msg.toString());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Couldn't connect to peer: " + peer.toString());
-            }
+            System.out.println("connecting to peer address: " + peer.getAddress().toString() + " on port " + peer.getPort());
+            Request reply = new FileReply(peer, request.getFileName(), peers);
+            TrackerConnection trackerConnection = new TrackerConnection(peer.getAddress(), peer.getPort(), reply);
+            Thread t = new Thread(trackerConnection);
+            t.start();
         }
     }
 

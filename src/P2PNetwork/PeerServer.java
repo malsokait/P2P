@@ -44,6 +44,8 @@ public class PeerServer extends Thread {
         run = true;
         while (run){
             try {
+                System.out.println(port);
+                System.out.println(serverSocket.getInetAddress().toString());
                 Socket socket = serverSocket.accept();
                 Request request = (Request) new ObjectInputStream(socket.getInputStream()).readObject();
                 peerEventBus.post(new PeerConnectEvent(request));

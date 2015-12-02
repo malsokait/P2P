@@ -44,6 +44,7 @@ public class TrackerServer extends Thread {
         run = true;
         while (run){
             try {
+                System.out.println("Listening on: " + serverSocket.getInetAddress().toString());
                 Socket socket = serverSocket.accept();
                 Request request = (Request) new ObjectInputStream(socket.getInputStream()).readObject();
                 eventBus.post(new TrackerConnectEvent(request));
