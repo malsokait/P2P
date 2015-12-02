@@ -113,12 +113,17 @@ public class PeerManager {
 
     public void processDownloadFileRequest(DownloadFileRequest request){
         PeerUpload peerUpload = new PeerUpload(request.getPeer(), request.getListenPort(), request.getFileName());
-        peerUpload.startUpload();
-        System.out.println("Uploading file: " + request.getFileName() + " to: " + request.getPeer().toString());
+        Thread t = new Thread(peerUpload);
+        t.start();
+        System.out.println("Uploading file: " + request.getFileName() + " to: " + request.getPeer().toString() + " on port " + request.getListenPort());
     }
 
 
     public static EventBus getPeerEventBus() {
         return peerEventBus;
+    }
+
+    public Peer getPeer() {
+        return peer;
     }
 }

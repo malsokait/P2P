@@ -29,6 +29,8 @@ public class PeerUpload extends Thread {
                 ByteSource byteSource = Files.asByteSource(file);
                 OutputStream fileOutputStream = socket.getOutputStream();
                 fileOutputStream.write(byteSource.read());
+                fileOutputStream.flush();
+                fileOutputStream.close();
                 finishUpload();
             }
         } catch (IOException e) {

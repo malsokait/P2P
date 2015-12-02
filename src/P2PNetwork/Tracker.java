@@ -73,6 +73,7 @@ public class Tracker {
                     System.out.println(msg.toString());
                 }
             } catch (IOException e) {
+                e.printStackTrace();
                 System.out.println("Couldn't connect to peer: " + peer.toString());
             }
         }

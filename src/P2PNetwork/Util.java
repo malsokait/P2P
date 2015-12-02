@@ -40,4 +40,13 @@ public class Util {
         }
         return false;
     }
+
+    public static InetAddress getRemote(){
+        try {
+            return InetAddress.getByName("192.168.0.20");
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
