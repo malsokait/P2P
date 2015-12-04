@@ -1,3 +1,5 @@
+package core;
+
 import comms.*;
 import events.PeerConnectEvent;
 import com.google.common.eventbus.EventBus;

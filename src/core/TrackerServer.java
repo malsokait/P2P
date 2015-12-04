@@ -1,5 +1,7 @@
+package core;
+
 import comms.Request;
-import events.PeerConnectEvent;
+import events.TrackerConnectEvent;
 import com.google.common.eventbus.EventBus;
 
 import java.io.IOException;
@@ -10,19 +12,20 @@ import java.net.Socket;
 /**
  * Created by malsokait on 2015-11-29.
  */
-public class PeerServer extends Thread {
+public class TrackerServer extends Thread {
     private int port;
     private ServerSocket serverSocket;
-    private boolean run;
-    private EventBus peerEventBus;
+    private boolean run = false;
+    private EventBus eventBus;
 
-    public PeerServer(int port) {
+
+    public TrackerServer(int port) {
         this.port = port;
-        peerEventBus = PeerManager.getPeerEventBus();
-        peerEventBus.register(this);
+        eventBus = Tracker.getEventBus();
+        eventBus.register(this);
     }
 
-    public void startPeerServer() {
+    public void startServerSocket() {
         try {
             serverSocket = new ServerSocket(port);
             this.start();
@@ -39,10 +42,12 @@ public class PeerServer extends Thread {
             try {
                 Socket socket = serverSocket.accept();
                 Request request = (Request) new ObjectInputStream(socket.getInputStream()).readObject();
-                peerEventBus.post(new PeerConnectEvent(request));
+                eventBus.post(new TrackerConnectEvent(request));
+
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }

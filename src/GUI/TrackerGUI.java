@@ -1,5 +1,7 @@
 package GUI;
 
+import core.Tracker;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,7 +20,7 @@ public class TrackerGUI {
 
     public static void main(String[] args) {
         TrackerGUI trackerGUI = new TrackerGUI();
-        JFrame frame = new JFrame("P2P Tracker");
+        JFrame frame = new JFrame("P2P core.Tracker");
         frame.setContentPane(trackerGUI.jp);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

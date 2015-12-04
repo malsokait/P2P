@@ -1,3 +1,5 @@
+package core;
+
 import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;

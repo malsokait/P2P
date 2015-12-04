@@ -1,3 +1,5 @@
+package core;
+
 import com.google.common.io.ByteSource;
 import com.google.common.io.Files;
 

@@ -1,3 +1,5 @@
+package core;
+
 import com.google.common.io.ByteSink;
 import com.google.common.io.Files;
 

@@ -1,6 +1,6 @@
 package comms;
 
-import Peer;
+import core.Peer;
 import com.google.common.collect.ImmutableSet;
 
 /**

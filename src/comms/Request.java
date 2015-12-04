@@ -1,6 +1,6 @@
 package comms;
 
-import Peer;
+import core.Peer;
 
 import java.io.Serializable;
 

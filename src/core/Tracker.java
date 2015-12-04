@@ -1,3 +1,5 @@
+package core;
+
 import comms.*;
 import events.TrackerConnectEvent;
 import com.google.common.collect.ImmutableSet;

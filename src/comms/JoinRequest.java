@@ -1,7 +1,7 @@
 package comms;
 
 
-import Peer;
+import core.Peer;
 
 /**
  * Created by malsokait on 2015-11-29.
