@@ -1,3 +1,3 @@
 # P2P
 
-readme
+P2P network for distributed systems course.
