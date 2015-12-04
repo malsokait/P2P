@@ -1,5 +1,3 @@
-package P2PNetwork;
-
 import com.google.common.base.MoreObjects;
 
 import java.io.Serializable;
@@ -10,19 +8,17 @@ import java.util.UUID;
 /**
  * Created by malsokait on 2015-11-29.
  */
-public class Peer implements Serializable{
+public class Peer implements Serializable {
     private UUID id;
     private InetAddress address;
     private int port;
 
 
-    public Peer(){
+    public Peer() {
         this.id = UUID.randomUUID();
-        this.address = Util.getHost();
+        this.address = Util.getLocalhost();
         this.port = Util.getFreePort();
     }
-
-
 
 
     @Override

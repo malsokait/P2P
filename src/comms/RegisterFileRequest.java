@@ -1,14 +1,14 @@
-package P2PNetwork.comms;
+package comms;
 
-import P2PNetwork.Peer;
+import Peer;
 
 /**
  * Created by malsokait on 2015-11-29.
  */
-public class FileRequest extends Request {
+public class RegisterFileRequest extends Request {
     private String fileName;
 
-    public FileRequest(Peer peer, String fileName){
+    public RegisterFileRequest(Peer peer, String fileName) {
         super(peer);
         this.fileName = fileName;
     }
@@ -16,5 +16,4 @@ public class FileRequest extends Request {
     public String getFileName() {
         return fileName;
     }
-
 }

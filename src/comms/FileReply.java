@@ -1,6 +1,6 @@
-package P2PNetwork.comms;
+package comms;
 
-import P2PNetwork.Peer;
+import Peer;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -23,4 +23,6 @@ public class FileReply extends Request {
     public String getFileName() {
         return fileName;
     }
+
+
 }

@@ -1,6 +1,4 @@
-package P2PNetwork;
-
-import P2PNetwork.comms.Request;
+import comms.Request;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +11,7 @@ import java.net.*;
  */
 public class Util {
     public static Integer getFreePort() {
-        try (ServerSocket serverSocket = new ServerSocket(0)){
+        try (ServerSocket serverSocket = new ServerSocket(0)) {
             return serverSocket.getLocalPort();
         } catch (IOException e) {
             e.printStackTrace();
@@ -21,12 +19,12 @@ public class Util {
         return null;
     }
 
-    public static InetAddress getHost() {
+    public static InetAddress getIp() {
         try {
             URL url = new URL("http://bot.whatismyipaddress.com");
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
             String ipAddress = in.readLine().trim();
-            if(ipAddress.length() > 0)
+            if (ipAddress.length() > 0)
                 return InetAddress.getByName(ipAddress);
             else {
                 System.out.println("Couldn't find internet IP address, using local address instead.");
@@ -43,21 +41,23 @@ public class Util {
         return null;
     }
 
-    public static InetAddress getTrackerAddress(){
+
+    public static InetAddress getLocalhost() {
         try {
-            return InetAddress.getByName("159.203.1.117");
+            return InetAddress.getLocalHost();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static boolean sendRequest(Socket socket, Request request){
+
+    public static boolean sendRequest(Socket socket, Request request) {
         try (ObjectOutputStream send = new ObjectOutputStream(socket.getOutputStream())) {
             send.writeObject(request);
             return true;
         } catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
         return false;
     }

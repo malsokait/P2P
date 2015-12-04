@@ -1,6 +1,6 @@
-package P2PNetwork.comms;
+package comms;
 
-import P2PNetwork.Peer;
+import Peer;
 
 /**
  * Created by malsokait on 2015-11-30.

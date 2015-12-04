@@ -1,5 +1,3 @@
-package P2PNetwork;
-
 import com.google.common.io.ByteSource;
 import com.google.common.io.Files;
 
@@ -16,16 +14,15 @@ public class PeerUpload extends Thread {
     private int listenPort;
     private File file;
 
-    public PeerUpload(Peer leecher, int listenPort, String fileName){
+    public PeerUpload(Peer leecher, int listenPort, String fileName) {
         this.leecher = leecher;
         this.listenPort = listenPort;
         this.file = new File(fileName);
     }
 
-    public void startUpload(){
-        try(Socket socket = new Socket(leecher.getAddress(), listenPort)) {
-            if(file.isFile()){
-                System.out.println("Processing file upload " + file.getName() + " to " + leecher.toString());
+    public void startUpload() {
+        try (Socket socket = new Socket(leecher.getAddress(), listenPort)) {
+            if (file.isFile()) {
                 ByteSource byteSource = Files.asByteSource(file);
                 OutputStream fileOutputStream = socket.getOutputStream();
                 fileOutputStream.write(byteSource.read());
@@ -38,7 +35,7 @@ public class PeerUpload extends Thread {
         }
     }
 
-    private void finishUpload(){
+    private void finishUpload() {
         this.interrupt();
     }
 

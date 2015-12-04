@@ -1,14 +1,14 @@
-package P2PNetwork.events;
+package events;
 
-import P2PNetwork.comms.Request;
+import comms.Request;
 
 /**
  * Created by malsokait on 2015-11-29.
  */
-public class TrackerConnectEvent {
+public class PeerConnectEvent {
     private Request request;
 
-    public TrackerConnectEvent(Request request){
+    public PeerConnectEvent(Request request) {
         this.request = request;
     }
 

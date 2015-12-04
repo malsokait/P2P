@@ -1,6 +1,4 @@
-package P2PNetwork;
-
-import P2PNetwork.comms.Request;
+import comms.Request;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -14,17 +12,16 @@ public class TrackerConnection extends Thread {
     private InetAddress address;
     private Request request;
 
-    public TrackerConnection(InetAddress address, int port, Request request){
+    public TrackerConnection(InetAddress address, int port, Request request) {
         this.address = address;
         this.port = port;
         this.request = request;
     }
 
-    public boolean connect(){
-        System.out.println("Establishing connection to " + address.getHostAddress());
-        try (Socket socket = new Socket(address, port)){
+    public boolean connect() {
+        try (Socket socket = new Socket(address, port)) {
             socket.setSoTimeout(5000);
-            if(socket.isConnected()) {
+            if (socket.isConnected()) {
                 Util.sendRequest(socket, request);
                 return true;
             }
@@ -36,11 +33,13 @@ public class TrackerConnection extends Thread {
     }
 
     @Override
-    public void run(){
-        if(connect())
+    public void run() {
+        if (connect())
             System.out.println("Sent request: " + request.toString() + " to address " + address.getHostAddress());
         else
             System.out.println("Failed to send request: " + request.toString() + " to address " + address.getHostAddress());
+
+        this.interrupt();
     }
 
 
